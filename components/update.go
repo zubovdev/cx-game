@@ -6,12 +6,14 @@ import (
 	"github.com/skycoin/cx-game/components/agents/agent_draw"
 	"github.com/skycoin/cx-game/components/agents/agent_health"
 	"github.com/skycoin/cx-game/components/agents/agent_physics"
+	"github.com/skycoin/cx-game/components/particles"
 	"github.com/skycoin/cx-game/components/particles/particle_physics"
 	"github.com/skycoin/cx-game/world"
 )
 
 func Update(dt float32) {
 	particle_physics.Update(dt)
+	particles.MyEmitter.Update(dt)
 }
 
 func FixedUpdate() {
@@ -25,4 +27,5 @@ func FixedUpdate() {
 
 func Draw(worldState *world.WorldState, cam *camera.Camera) {
 	agent_draw.DrawAgents(worldState.AgentList, cam)
+	particles.MyEmitter.Draw(cam)
 }

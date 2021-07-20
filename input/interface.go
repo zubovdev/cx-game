@@ -26,7 +26,7 @@ func GetButton(button string) bool {
 func GetButtonDown(button string) bool {
 	key, ok := ButtonsToKeys[button]
 	if !ok {
-		log.Printf("KEY [%s] IS NOT MAPPED!",button)
+		log.Printf("KEY [%s] IS NOT MAPPED!", button)
 		return false
 	}
 	pressed, ok := KeysPressedDown[key]
@@ -73,10 +73,22 @@ func GetAxis(axis Axis) float32 {
 
 }
 
-func GetMouseX() float64 {
-	return mouseCoords.X
+func GetMouseX() float32 {
+	return float32(mouseCoords.X)
 }
 
-func GetMouseY() float64 {
-	return mouseCoords.Y
+func GetMouseY() float32 {
+	return float32(mouseCoords.Y)
+}
+
+func GetScreenX() float32 {
+	screenX := float32(((GetMouseX()-float32(widthOffset))/scale - float32(window_.Width)/2)) / Zoom // adjust mouse position with zoom
+	// fmt.Println("       | ", widthOffset, "   ", heightOffset, "  ", scale)
+	return screenX
+}
+
+func GetScreenY() float32 {
+	screenY := float32(((GetMouseY()-float32(heightOffset))/scale-float32(window_.Height)/2)*-1) / Zoom
+	return screenY
+
 }

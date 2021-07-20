@@ -98,7 +98,7 @@ func NewSpriteAnimated(fileName string, lwin *render.Window) *SpriteAnimated {
 	for key, value := range spriteAnimated.Frames {
 		var frame Frames
 		mapstructure.Decode(value, &frame)
-		sliceKey := regexp.MustCompile("[^\\s]+")
+		sliceKey := regexp.MustCgiompile("[^\\s]+")
 		sliceArr := sliceKey.FindAllString(key, -1)
 		frame.Name = sliceArr[0]
 		frame.Action = strings.Split(strings.ReplaceAll(sliceArr[1], "#", ""), ".")[0]

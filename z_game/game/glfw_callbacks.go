@@ -21,17 +21,18 @@ func mouseButtonCallback(
 }
 
 // mouse position relative to screen
-func screenPos() (float32,float32) {
-	screenX := float32(((input.GetMouseX()-float64(widthOffset))/float64(scale) - float64(win.Width)/2)) / Cam.Zoom // adjust mouse position with zoom
-	screenY := float32(((input.GetMouseY()-float64(heightOffset))/float64(scale)-float64(win.Height)/2)*-1) / Cam.Zoom
-	return screenX,screenY
+func screenPos() (float32, float32) {
+	screenX := float32(((input.GetMouseX()-float32(widthOffset))/scale - float32(win.Width)/2)) / Cam.Zoom // adjust mouse position with zoom
+	screenY := float32(((input.GetMouseY()-float32(heightOffset))/scale-float32(win.Height)/2)*-1) / Cam.Zoom
+	return screenX, screenY
 }
-
 
 func mouseReleaseCallback(
 	w *glfw.Window, b glfw.MouseButton, a glfw.Action, mk glfw.ModifierKey,
 ) {
-	screenX,screenY := screenPos()
+	// screenX, screenY := screenPos()
+	screenX := input.GetScreenX()
+	screenY := input.GetScreenY()
 
 	inventory := item.GetInventoryById(inventoryId)
 	inventory.OnReleaseMouse(screenX, screenY, Cam, CurrentPlanet, player)
@@ -45,7 +46,7 @@ func mousePressCallback(
 		return
 	}
 
-	screenX,screenY := screenPos()
+	screenX, screenY := screenPos()
 
 	didSelectPaleteTile := tilePaletteSelector.TrySelectTile(screenX, screenY)
 	if didSelectPaleteTile {
@@ -77,7 +78,9 @@ func mousePressCallback(
 	inventory := item.GetInventoryById(inventoryId)
 	clickedSlot :=
 		inventory.TryClickSlot(screenX, screenY, Cam, CurrentPlanet, player)
-	if clickedSlot { return }
+	if clickedSlot {
+		return
+	}
 
 	item.GetInventoryById(inventoryId).
 		TryUseItem(screenX, screenY, Cam, CurrentPlanet, player)
@@ -89,7 +92,6 @@ var (
 )
 
 func windowSizeCallback(window *glfw.Window, width, height int) {
-
 	// gl.Viewport(0, 0, int32(width), int32(height))
 	scaleToFitWidth := float32(width) / float32(win.Width)
 	scaleToFitHeight := float32(height) / float32(win.Height)
@@ -107,4 +109,5 @@ func windowSizeCallback(window *glfw.Window, width, height int) {
 
 func scrollCallback(w *glfw.Window, xOff, yOff float64) {
 	Cam.SetCameraZoomPosition(float32(yOff))
+	input.Zoom = Cam.Zoom
 }

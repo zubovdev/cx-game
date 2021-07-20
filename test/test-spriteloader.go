@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"math/rand"
 	"runtime"
@@ -23,7 +24,23 @@ func keyCallBack(w *glfw.Window, k glfw.Key, s int, a glfw.Action, mk glfw.Modif
 	if a == glfw.Press && k == glfw.KeyEscape {
 		w.SetShouldClose(true)
 	}
+	if a == glfw.Press {
+		if k == glfw.KeyW {
+			ypos += 1
+		} else if k == glfw.KeyS {
+			ypos -= 1
+		}
+		if k == glfw.KeyA {
+			xpos -= 1
+		} else if k == glfw.KeyD {
+			xpos += 1
+		}
+
+		fmt.Println(xpos, "   ", ypos)
+	}
 }
+
+var xpos, ypos float32
 
 func main() {
 	log.Print("running test")
@@ -40,11 +57,12 @@ func main() {
 	spriteId := spriteloader.
 		GetSpriteIdByName("star")
 	rand.Seed(time.Now().UnixNano())
+	xpos, ypos = 0, 0
 	for !window.ShouldClose() {
 		gl.ClearColor(1, 1, 1, 1)
 		gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
 
-		spriteloader.DrawSpriteQuad(-1, -1, 1, 1, spriteId)
+		spriteloader.DrawSpriteQuad(xpos, ypos, 1, 1, spriteId)
 		glfw.PollEvents()
 		window.SwapBuffers()
 	}

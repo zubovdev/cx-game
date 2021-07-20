@@ -44,7 +44,7 @@ var (
 
 	catIsScratching bool
 
-	tilePaletteSelector    ui.TilePaletteSelector
+	tilePaletteSelector ui.TilePaletteSelector
 
 	inventoryId item.InventoryID
 
@@ -63,7 +63,7 @@ func Init() {
 	window.SetScrollCallback(scrollCallback)
 	window.SetSizeCallback(windowSizeCallback)
 
-	input.Init(win.Window)
+	input.Init(&win)
 	sound.Init()
 	spriteloader.InitSpriteloader(&win)
 	spriteloader.DEBUG = false

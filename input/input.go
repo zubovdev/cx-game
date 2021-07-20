@@ -9,7 +9,10 @@ package input
 	Configurability (input mapping) is essential for modern games.
 */
 
-import "github.com/go-gl/glfw/v3.3/glfw"
+import (
+	"github.com/go-gl/glfw/v3.3/glfw"
+	"github.com/skycoin/cx-game/render"
+)
 
 type MouseCoords struct {
 	X float64
@@ -17,8 +20,11 @@ type MouseCoords struct {
 }
 
 var (
-	window_      *glfw.Window
+	window_      *render.Window
 	inputContext InputContext
+
+	//this is to adjust screen position
+	Zoom float32 = 1
 )
 
 type InputContext uint8
@@ -28,7 +34,7 @@ const (
 	SWITCH_COSTUME
 )
 
-func Init(window *glfw.Window) {
+func Init(window *render.Window) {
 	KeysPressed = make(map[glfw.Key]bool)
 	KeysPressedDown = make(map[glfw.Key]bool)
 	KeysPressedUp = make(map[glfw.Key]bool)
@@ -44,8 +50,8 @@ func Init(window *glfw.Window) {
 }
 
 func registerCallbacks() {
-	window_.SetKeyCallback(keyCallback)
-	window_.SetCursorPosCallback(cursorPosCallback)
+	window_.Window.SetKeyCallback(keyCallback)
+	window_.Window.SetCursorPosCallback(cursorPosCallback)
 }
 
 func registerKeyMaps() {
