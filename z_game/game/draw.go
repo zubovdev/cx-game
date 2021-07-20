@@ -38,7 +38,7 @@ func Draw() {
 	enemies.DrawBasicEnemies(Cam)
 	components.Draw(CurrentPlanet.WorldState, Cam)
 	player.Draw(Cam, CurrentPlanet)
-	ui.DrawHUD(player.GetHUDState())
+	ui.DrawHUD(player.GetHUDState(fps))
 
 	// tile - air line (green)
 	collidingTileLines := CurrentPlanet.GetCollidingTilesLinesRelative(

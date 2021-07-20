@@ -73,12 +73,14 @@ func (player *Player) Update(dt float32, planet *world.Planet) {
 	}
 }
 
-func (player *Player) GetHUDState() ui.HUDState {
+func (player *Player) GetHUDState(fpsCounter *Fps) ui.HUDState {
 	// TODO tempoary
 	return ui.HUDState{
 		Health: 40, MaxHealth: 100,
 
 		Fullness: 0.3, Hydration: 0.4, Oxygen: 0.5, Fuel: 0.6,
+		ShowFps: true,
+		Fps:     fpsCounter.CurFps,
 	}
 }
 
