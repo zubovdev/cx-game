@@ -8,6 +8,14 @@ import (
 	"image"
 )
 
+const (
+	Arrow     = "arrow"
+	Block     = "block"
+	Crosshair = "crosshair"
+	Dig       = "dig"
+	Build     = "build"
+)
+
 var (
 	cursors = make(map[string]*glfw.Cursor)
 
@@ -33,11 +41,11 @@ func Load(configPath, spritePath string) error {
 		return fmt.Errorf("failed to load sprite sheet config for the cursors: %v", err)
 	}
 
-	// Loading image.
+	// Loading an image.
 	_, spriteImg, _ := spriteloader.LoadPng(spritePath)
 	for cursorName, cfg := range sheetConfig.SpriteConfigs {
 		// Creating an image from the loaded spite image.
-		img := spriteImg.SubImage(image.Rect(cfg.Top, cfg.Left, cfg.Top+cfg.Height, cfg.Left+cfg.Width))
+		img := spriteImg.SubImage(image.Rect(cfg.Left, cfg.Top, cfg.Left+cfg.Width, cfg.Top+cfg.Height))
 
 		// Registering the cursor.
 		cursors[cursorName] = glfw.CreateCursor(img, 0, 0)

@@ -1,7 +1,14 @@
+---
 width: 48
 height: 32
 sprites:
-  default:
+  crosshair:
+    unit: pixel
+    top: 0
+    left: 32
+    width: 16
+    height: 16
+  arrow:
     unit: pixel
     left: 7
     top: 7
@@ -10,11 +17,7 @@ sprites:
   block:
     unit: pixel
     left: 16
-    width: 16
-    height: 16
-  crosshair:
-    unit: pixel
-    left: 32
+    top: 0
     width: 16
     height: 16
   dig:
@@ -23,7 +26,7 @@ sprites:
     left: 7
     width: 9
     height: 9
-  break:
+  build:
     unit: pixel
     top: 17
     left: 21

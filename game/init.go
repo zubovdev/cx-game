@@ -154,7 +154,7 @@ func Init() {
 		log.Fatalf("Failed to load cursors: %v", err)
 	}
 
-	cur, err := cursor.Get("default")
+	cur, err := cursor.Get(cursor.Arrow)
 	if err != nil {
 		log.Fatalf("Failed to get default cursor: %v", err)
 	}
