@@ -150,7 +150,13 @@ func Init() {
 	//add oxygen emitter
 	particle_emitter.EmitOxygen(playerAgentID, &World.Entities.Particles)
 
-	//window.SetCursor(cursor.NewFromSprite("default"))
-	cursor.Load("./assets/cursors/cursors.yaml", "./assets/cursors/cursors.png")
-	window.SetCursor(cursor.Get("default"))
+	if err := cursor.Load("./assets/cursors/cursors.yaml", "./assets/cursors/cursors.png"); err != nil {
+		log.Fatalf("Failed to load cursors: %v", err)
+	}
+
+	cur, err := cursor.Get("default")
+	if err != nil {
+		log.Fatalf("Failed to get default cursor: %v", err)
+	}
+	window.SetCursor(cur)
 }
