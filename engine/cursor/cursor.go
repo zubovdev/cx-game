@@ -10,7 +10,10 @@ import (
 
 var cursors = make(map[string]*glfw.Cursor)
 
+// Get returns the cursor by name.
+// If the cursor does not exist, a fatal error will occur.
 func Get(name string) *glfw.Cursor {
+	// Check whether cursor exist.
 	cursor, ok := cursors[name]
 	if !ok {
 		log.Fatalf("Unknown cursor %s", name)
@@ -18,9 +21,10 @@ func Get(name string) *glfw.Cursor {
 	return cursor
 }
 
-func Load(filePath, spritePath string) {
+// Load loads the cursors defined in the config.
+func Load(configPath, spritePath string) {
 	// Reading the sprite sheet config.
-	sheetConfig, err := spriteloader.ReadSpriteSheetConfig(filePath)
+	sheetConfig, err := spriteloader.ReadSpriteSheetConfig(configPath)
 	if err != nil {
 		log.Fatalln("failed to load sprite sheet config for the cursors:", err)
 	}
