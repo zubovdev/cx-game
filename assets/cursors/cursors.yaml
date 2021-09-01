@@ -1,12 +1,31 @@
----
-
 width: 48
 height: 32
-
 sprites:
-  cursors/default:
+  default:
     unit: pixel
     left: 7
     top: 7
     width: 9
     height: 9
+  block:
+    unit: pixel
+    left: 16
+    width: 16
+    height: 16
+  crosshair:
+    unit: pixel
+    left: 32
+    width: 16
+    height: 16
+  dig:
+    unit: pixel
+    top: 16
+    left: 7
+    width: 9
+    height: 9
+  break:
+    unit: pixel
+    top: 17
+    left: 21
+    width: 11
+    height: 10

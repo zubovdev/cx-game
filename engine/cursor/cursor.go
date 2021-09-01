@@ -6,7 +6,6 @@ import (
 	"github.com/go-gl/glfw/v3.3/glfw"
 	"github.com/skycoin/cx-game/engine/spriteloader"
 	"image"
-	"strings"
 )
 
 var (
@@ -36,12 +35,7 @@ func Load(configPath, spritePath string) error {
 
 	// Loading image.
 	_, spriteImg, _ := spriteloader.LoadPng(spritePath)
-	for spriteName, cfg := range sheetConfig.SpriteConfigs {
-		// Splitting the spriteName by the "/".
-		// Example: actual spriteName is "cursors/default" while cursor name must be "default".
-		elements := strings.Split(spriteName, "/")
-		cursorName := elements[len(elements)-1]
-
+	for cursorName, cfg := range sheetConfig.SpriteConfigs {
 		// Creating an image from the loaded spite image.
 		img := spriteImg.SubImage(image.Rect(cfg.Top, cfg.Left, cfg.Top+cfg.Height, cfg.Left+cfg.Width))
 
