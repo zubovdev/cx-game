@@ -1,0 +1,12 @@
+---
+
+width: 48
+height: 32
+
+sprites:
+  cursors/default:
+    unit: pixel
+    left: 7
+    top: 7
+    width: 9
+    height: 9

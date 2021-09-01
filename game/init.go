@@ -1,6 +1,7 @@
 package game
 
 import (
+	"github.com/skycoin/cx-game/engine/cursor"
 	"log"
 	"runtime"
 
@@ -149,4 +150,7 @@ func Init() {
 	//add oxygen emitter
 	particle_emitter.EmitOxygen(playerAgentID, &World.Entities.Particles)
 
+	//window.SetCursor(cursor.NewFromSprite("default"))
+	cursor.Load("./assets/cursors/cursors.yaml", "./assets/cursors/cursors.png")
+	window.SetCursor(cursor.Get("default"))
 }
